@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Employee</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/employees">Employee List</a></h3>
+      <h1>Create New Employee</h1>
+      <form action="/employees/save" method="POST">
+        <table>
+          <tbody>
+            <tr>
+              <td>First Name</td>
+              <td><input type="text" name="firstName" /></td>
+            </tr>
+            <tr>
+              <td>Last Name</td>
+              <td><input type="text" name="lastName"></textarea></td>
+            </tr>
+            <tr>
+              <td>Hire Date (YYYY-MM-DD)</td>
+              <td><input type="date" name="hireDate"/></td>
+            </tr>
+            <tr>
+              <td>Role</td>
+              <td><input type="radio" name="role" value="CEO">CEO</td>
+              <td><input type="radio" name="role" value="VP">VP</td>
+              <td><input type="radio" name="role" value="MANAGER">MANAGER</td>
+              <td><input type="radio" name="role" value="LACKEY">LACKEY</td>
+            </tr>
+            <tr>
+                <td>Favourite Joke</td>
+                <td><input type="text" name="favouriteJoke" /></td>
+            </tr>
+            <tr>
+                <td>Favourite Quote</td>
+                <td><input type="text" name="favouriteQuote" /></td>
+            </tr>
+            <tr>
+              <td colspan="2"><input type="submit" value="Save" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>

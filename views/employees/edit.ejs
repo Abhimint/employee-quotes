@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Employee</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/employees">Employee List</a></h3>
+      <h1>Edit Employee</h1>
+      <form action="/employees/update/<%= employee._id%>" method="post">
+        <table>
+          <tbody>
+            <tr>
+              <td>First Name</td>
+              <td><input type="text" name="firstName" value="<%= employee.firstName %>"/></td>
+            </tr>
+            <tr>
+              <td>Last Name</td>
+              <td><input type="text" name="lastName" value="<%= employee.lastName %>"/></td>
+            </tr>
+            <tr>
+              <td>Hire Date (YYYY-MM-DD)</td>
+              <td><input type="date" name="hireDate" value="<%= employee.hireDate %>"/></td>
+            </tr>
+            <tr>
+              <td>Role</td>
+              <td><input type="text" name="role" value="<%= employee.role %>" /></td>
+            </tr>
+            <tr>
+                <td>Favourite Joke</td>
+                <td><input type="text" name="favouriteJoke" value="<%= employee.favouriteJoke %>" /></td>
+            </tr>
+            <tr>
+                <td>Favourite Quote</td>
+                <td><input type="text" name="favouriteQuote" value="<%= employee.favouriteQuote %>" /></td>
+            </tr>
+            <tr>
+              <td colspan="2"><button type="submit">Update</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>

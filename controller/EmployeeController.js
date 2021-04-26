@@ -3,7 +3,7 @@ const Employee = mongoose.model('Employee');
 
 var employeeController = {};
 
-// Show all employees
+// Show all employees (GET)
 employeeController.list = (req, res) => {
     Employee.find({}).exec((err, employees) => {
         if (err) {
@@ -15,7 +15,7 @@ employeeController.list = (req, res) => {
     });
 };
 
-// Show employee with :id
+// Show employee with :id (GET)
 employeeController.show = (req, res) => {
     Employee.findOne({_id: req.params.id}).exec((err, employee) => {
         if (err) {
@@ -27,12 +27,12 @@ employeeController.show = (req, res) => {
     })
 }
 
-// Create new employee - redrect to page
+// Create employee - Redirection Action
 employeeController.create = (req, res) => {
     res.render('../views/employees/create');
 }
 
-// Save new employee
+// Save new employee (POST)
 employeeController.save = (req, res) => {
     var employee = new Employee(req.body);
 
@@ -42,7 +42,7 @@ employeeController.save = (req, res) => {
             res.render('../views/employees/create');
         } else {
             console.log('Successfully saved employee details');
-            res.redirect('/employees/show' + employee._id);
+            res.redirect('/employees/show/' + employee._id);
         }
     });
 }
@@ -59,7 +59,7 @@ employeeController.edit = (req, res) => {
     });
 }
 
-// Currently edited employee update
+// Currently edited employee update (PUT)
 employeeController.update = (req, res) => {
     Employee.findByIdAndUpdate(req.params.id, { $set: { 
         firstName: req.body.firstName,
@@ -80,7 +80,7 @@ employeeController.update = (req, res) => {
         });
 }
 
-// Delete single employee by :_id
+// Delete single employee by :_id (DELETE)
 employeeController.delete = (req, res) => {
     Employee.remove({_id: req.params.id}, (err) => {
         if (err) {

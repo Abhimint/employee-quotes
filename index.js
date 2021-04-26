@@ -1,8 +1,6 @@
 const express = require('express');
-// const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-// const router = require('./routes/Employee');
 const app = express();
 
 const Employee = require('./models/Employee');
@@ -14,7 +12,6 @@ app.listen(3000,() => {
 
 // any USES to be added before the CRUD ops
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use('/Employee', router);
 
 // GET
 app.get('/', (req,res) => {

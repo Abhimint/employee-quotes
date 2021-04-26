@@ -92,26 +92,4 @@ employeeController.delete = (req, res) => {
     });
 }
 
-// function create(req, res, next) {
-//     let employeeFirstName = req.body.firstName;
-//     let employeeLastName = req.body.lastName;
-//     let employeeHireDate = req.body.hireDate;
-//     let employeeRole = req.body.role;
-//     let employeeFavouriteJoke = req.body.favouriteJoke;
-//     let employeeFavouriteQuote = req.body.favouriteQuote;
-
-//     let employee = new Employee({
-//         employeeFirstName,
-//         employeeLastName,
-//         employeeHireDate,
-//         employeeRole,
-//         employeeFavouriteJoke,
-//         employeeFavouriteQuote
-//     });
-
-//     employee.save().then((data) => {
-//         res.send(data);
-//     });
-// }
-
 module.exports = employeeController;

@@ -9,5 +9,6 @@ MVC+(?) As prescribed here --> https://dev.to/pacheco/designing-a-better-archite
 
 ## How to run the application?
 ###
+`npm i` <br>
 `npm run start`
 ###

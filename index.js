@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const Employee = require('./models/Employee');
+var employees = require('./routes/employees');
 
 //Server
 app.listen(3000,() => {
@@ -12,6 +13,7 @@ app.listen(3000,() => {
 
 // any USES to be added before the CRUD ops
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/employees', employees);
 
 // GET
 app.get('/', (req,res) => {

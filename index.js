@@ -4,13 +4,13 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 const Employee = require('./models/Employee');
 mongoose.Promise = global.Promise;
-// const fetch = require('node-fetch');
 
 const https = require('https');
-
 const QUOTE_URL = 'https://ron-swanson-quotes.herokuapp.com/v2/quotes';
 
 var app = express();
+
+// Adding moment.js for Date formatting app wide
 app.locals.moment = require('moment');
 
 // TODO: Look into a way to add some lifecycle hooks/observables to give order to execution
@@ -24,21 +24,17 @@ mongoose.connect(connectionString, { useUnifiedTopology: true, useNewUrlParser: 
     app.listen(3000, () => {
         console.log('listening on port 3000');
         // Fetch Ron Swanson Quote
-        // fetch(QUOTE_URL).then( res => res.json() ).then(res => console.log(res));
-        // fetch(QUOTE_URL).resolve(res => {
-        //   console.log('Ron Swanson Quote', res.json());
-        // });
-        // https.get(QUOTE_URL, res => {
-        //   res.setEncoding('utf8');
-        //   let quote = "";
-        //   res.on('data', data => {
-        //     quote += data;
-        //   });
-        //   res.on('end', () => {
-        //     quote = JSON.parse(quote);
-        //     console.log('Ron Swanson Quote', quote);
-        //   })
-        // });
+        https.get(QUOTE_URL, res => {
+          res.setEncoding('utf8');
+          let quote = "";
+          res.on('data', data => {
+            quote += data;
+          });
+          res.on('end', () => {
+            quote = JSON.parse(quote);
+            console.log('Ron Swanson Quote', quote);
+          })
+        });
     });
     }).catch((err) => console.error(err));
 

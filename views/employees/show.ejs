@@ -22,7 +22,7 @@
           <tr>
             <td>Hire Date</td>
             <td>:</td>
-            <td><%= employee.hireDate %></td>
+            <td><%= moment(employee.hireDate).format('YYYY-MM-DD') %></td>
           </tr>
           <tr>
             <td>Role</td>

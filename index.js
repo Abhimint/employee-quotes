@@ -5,8 +5,8 @@ var mongoose = require('mongoose');
 const Employee = require('./models/Employee');
 mongoose.Promise = global.Promise;
 
-const https = require('https');
-const QUOTE_URL = 'https://ron-swanson-quotes.herokuapp.com/v2/quotes';
+// const https = require('https');
+// const QUOTE_URL = 'https://ron-swanson-quotes.herokuapp.com/v2/quotes';
 
 var app = express();
 
@@ -23,19 +23,21 @@ mongoose.connect(connectionString, { useUnifiedTopology: true, useNewUrlParser: 
     // Initiate connection on port 3000
     app.listen(3000, () => {
         console.log('listening on port 3000');
-        // Fetch Ron Swanson Quote
-        https.get(QUOTE_URL, res => {
-          res.setEncoding('utf8');
-          let quote = "";
-          res.on('data', data => {
-            quote += data;
-          });
-          res.on('end', () => {
-            quote = JSON.parse(quote);
-            console.log('Ron Swanson Quote', quote);
-          })
-        });
+
+      //   https.get(QUOTE_URL, res => {
+      //     res.setEncoding('utf8');
+      //     let quote = "";
+      //     res.on('data', data => {
+      //       quote += data;
+      //     });
+      //     res.on('end', () => {
+      //       quote = JSON.parse(quote);
+      //       console.log('Ron Swanson Quote', quote[0]);
+      //     })
+      // });
+
     });
+
     }).catch((err) => console.error(err));
 
 var index = require('./routes/index');

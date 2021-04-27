@@ -7,20 +7,20 @@
     <div class="container">
       <h3><a href="/employees">Employee List</a></h3>
       <h1>Edit Employee</h1>
-      <form action="/employees/update/<%= employee._id%>" method="post">
+      <form action="/employees/update/<%= employee._id%>" method="POST">
         <table>
           <tbody>
             <tr>
               <td>First Name</td>
-              <td><input type="text" name="firstName" value="<%= employee.firstName %>"/></td>
+              <td><input type="text" name="firstName" value="<%= employee.firstName %>" required/></td>
             </tr>
             <tr>
               <td>Last Name</td>
-              <td><input type="text" name="lastName" value="<%= employee.lastName %>"/></td>
+              <td><input type="text" name="lastName" value="<%= employee.lastName %>" required/></td>
             </tr>
             <tr>
-              <td>Hire Date (YYYY-MM-DD)</td>
-              <td><input type="date" name="hireDate" value="<%= employee.hireDate %>"/></td>
+              <td>Hire Date</td>
+              <td><input type="date" name="hireDate" value="<%= employee.hireDate %>" required max="<%= moment().format('YYYY-MM-DD'); %>"/></td>
             </tr>
             <tr>
               <td>Role</td>
@@ -28,11 +28,11 @@
             </tr>
             <tr>
                 <td>Favourite Joke</td>
-                <td><input type="text" name="favouriteJoke" value="<%= employee.favouriteJoke %>" /></td>
+                <td><input type="text" name="favouriteJoke" value="<%= locals.joke %>" required/></td>
             </tr>
             <tr>
                 <td>Favourite Quote</td>
-                <td><input type="text" name="favouriteQuote" value="<%= employee.favouriteQuote %>" /></td>
+                <td><input type="text" name="favouriteQuote" value="<%= locals.swansonQuote %>" required/></td>
             </tr>
             <tr>
               <td colspan="2"><button type="submit">Update</button></td>

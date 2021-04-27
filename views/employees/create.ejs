@@ -12,30 +12,30 @@
           <tbody>
             <tr>
               <td>First Name</td>
-              <td><input type="text" name="firstName" /></td>
+              <td><input type="text" name="firstName" required/></td>
             </tr>
             <tr>
               <td>Last Name</td>
-              <td><input type="text" name="lastName"></textarea></td>
+              <td><input type="text" name="lastName" required/></td>
             </tr>
             <tr>
               <td>Hire Date (YYYY-MM-DD)</td>
-              <td><input type="date" name="hireDate"/></td>
+              <td><input type="date" name="hireDate" required max="<%= moment().format('YYYY-MM-DD'); %>"/></td>
             </tr>
             <tr>
               <td>Role</td>
-              <td><input type="radio" name="role" value="CEO">CEO</td>
-              <td><input type="radio" name="role" value="VP">VP</td>
-              <td><input type="radio" name="role" value="MANAGER">MANAGER</td>
-              <td><input type="radio" name="role" value="LACKEY">LACKEY</td>
+              <td><input type="radio" name="role" value="CEO" />CEO</td>
+              <td><input type="radio" name="role" value="VP" />VP</td>
+              <td><input type="radio" name="role" value="MANAGER" />MANAGER</td>
+              <td><input type="radio" name="role" value="LACKEY" checked/>LACKEY</td>
             </tr>
             <tr>
                 <td>Favourite Joke</td>
-                <td><input type="text" name="favouriteJoke" /></td>
+                <td><input type="text" name="favouriteJoke" value="<%= locals.joke %>" required/></td>
             </tr>
             <tr>
                 <td>Favourite Quote</td>
-                <td><input type="text" name="favouriteQuote" /></td>
+                <td><input type="text" name="favouriteQuote" value="<%= locals.swansonQuote %>" required/></td>
             </tr>
             <tr>
               <td colspan="2"><input type="submit" value="Save" /></td>

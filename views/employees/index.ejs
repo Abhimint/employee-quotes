@@ -11,16 +11,25 @@
       <table>
         <thead>
           <tr>
-            <th>Employee Name</th>
-            <th>Position</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Hire Date</th>
+            <th>Role</th>
+            <th>Favourite Joke</th>
+            <th>Favourite Quote</th>
           </tr>
         </thead>
         <tbody>
 
-          <% for(var i=0; i<employees.length;i++) { %>
+          <% for(var i=0; i < employees.length; i++) { %>
             <tr>
               <td><a href="/employees/show/<%= employees[i]._id%>"><%= employees[i].firstName%></a></td>
-              <td><%= employees[i].position%></td>
+              <td><a href="/employees/show/<%= employees[i]._id%>"><%= employees[i].lastName%></a></td>
+              <td><a href="/employees/show/<%= employees[i]._id%>"><%= moment(employees[i].hireDate).format('YYYY-MM-DD')%></a></td>
+              <td><a href="/employees/show/<%= employees[i]._id%>"><%= employees[i].role%></a></td>
+              <td><a href="/employees/show/<%= employees[i]._id%>"><%= employees[i].favouriteJoke%></a></td>
+              <td><a href="/employees/show/<%= employees[i]._id%>"><%= employees[i].favouriteQuote%></a></td>
+              <!-- <td><%= employees[i].position%></td> -->
             </tr>
           <% } %>
         </tbody>

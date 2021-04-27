@@ -1,11 +1,16 @@
 const mongoose = require('mongoose');
-const https = require('https');
 const fetch = require('node-fetch');
+
+// Used for pulling vars into view 
 const { locals } = require('..');
+
 const Employee = mongoose.model('Employee');
 
+// TODO: Shift to api endpoints 
 const QUOTE_URL = 'https://ron-swanson-quotes.herokuapp.com/v2/quotes';
 const JOKE_URL = 'https://icanhazdadjoke.com/';
+
+// Ensure where these template vars are being rendered, those fields !disabled as ejs does not recognize the value
 var swansonQuote = '';
 var joke = '';
 
@@ -48,10 +53,7 @@ employeeController.save = (req, res) => {
     var employee = new Employee(req.body);
 
     employee.save((err) => {
-        console.log('.save favouriteJoke', req.body.favouriteJoke);
-        // swansonQuote = swansonQuote();
-        console.log('This is the swansonQuote var', swansonQuote);
-        // alert(fetchQuote);
+        // Add pre-post server side logic here
         if (err) {
             console.error('Error saving employee, redirecting back to create page', err);
             res.render('../views/employees/create');
@@ -108,48 +110,10 @@ employeeController.delete = (req, res) => {
     });
 }
 
-// employeeController.fetchAndAttributeQuote = (req, res) => {
-//     Employee.
-// }
-
-// Fetch Ron Swanson Quote
-// var fetchQuote = async () => {
-//     await https.get(QUOTE_URL, res => {
-//         res.setEncoding('utf8');
-//         let quote = "";
-//         res.on('data', data => {
-//           quote += data;
-//         });
-//         res.on('end', async () => {
-//           quote = JSON.parse(quote[0]);
-//           swansonQuote = quote[0];
-//           return await swansonQuote;
-//         })
-//     });
-// }
-
-// swansonQuote = (async () => {
-//     await https.get(QUOTE_URL, res => {
-//         res.setEncoding('utf8');
-//         let quote = "";
-//         res.on('data', data => {
-//           return quote += data;
-//         });
-//         res.on('end', async () => {
-//           quote = await JSON.parse(quote[0]);
-//         //   swansonQuote = quote[0];
-//         console.log('Inside the IIFE ', quote[0]);
-//           return quote[0];
-//         })
-//     });
-// })();
-
 fetch(QUOTE_URL)
     .then(res => res.json())
     .then(json => {
-        // console.log('node-fetch swanson', json)
         swansonQuote = json[0];
-        // console.log('Now swasonquote is ', swansonQuote);
         return encodeURIComponent(swansonQuote);
     });
 

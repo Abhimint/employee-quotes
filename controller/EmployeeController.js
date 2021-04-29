@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
+const { check, validationResult } = require('express-validator');
 
 // Used for pulling vars into view 
 const { locals } = require('..');
@@ -9,10 +10,14 @@ const Employee = mongoose.model('Employee');
 // TODO: Shift to api endpoints 
 const QUOTE_URL = 'https://ron-swanson-quotes.herokuapp.com/v2/quotes';
 const JOKE_URL = 'https://icanhazdadjoke.com/';
+const SELF_REPO = 'https://github.com/Abhimint/employee-quotes';
 
 // Ensure where these template vars are being rendered, those fields !disabled as ejs does not recognize the value
 var swansonQuote = '';
 var joke = '';
+
+// Var gets updated on app startup, on create employee, update employee and delete employee
+var ceoExists = false;
 
 var employeeController = {};
 
@@ -42,7 +47,8 @@ employeeController.show = (req, res) => {
 
 // Create employee - Redirection Action
 employeeController.create = (req, res) => {
-    res.render('../views/employees/create', { 
+    res.render('../views/employees/create', {
+        // fetched api results sent over as query params 
         swansonQuote: swansonQuote, 
         joke: joke 
     });
@@ -51,16 +57,21 @@ employeeController.create = (req, res) => {
 // Save new employee (POST)
 employeeController.save = (req, res) => {
     var employee = new Employee(req.body);
-
+    // const uniqueCeoError = validationResult
     employee.save((err) => {
         // Add pre-post server side logic here
-        if (err) {
-            console.error('Error saving employee, redirecting back to create page', err);
-            res.render('../views/employees/create');
-        } else {
-            console.log('Successfully saved employee details');
-            res.redirect('/employees/show/' + employee._id);
-        }
+        // if (doesCEOExist) {
+            if (err) {
+                console.error('Error saving employee, redirecting back to create page', err);
+                res.render('../views/employees/create');
+            } else {
+                console.log('Successfully saved employee details');
+                res.redirect('/employees/show/' + employee._id);
+            }
+        // } else {
+        //     console.log('Entered else for the doesCEOExist condition');
+        //     res.redirect('../views/employees/create', );
+        // }
     });
 }
 
@@ -71,7 +82,10 @@ employeeController.edit = (req, res) => {
             console.error('Error editing the specific employee', err);
         } else {
             // Redirect to the edit page
-            res.render('../views/employees/edit', { employee: employee });
+            res.render('../views/employees/edit', { employee: employee, 
+                swansonQuote: swansonQuote, 
+                joke: joke 
+            });
         }
     });
 }
@@ -110,6 +124,7 @@ employeeController.delete = (req, res) => {
     });
 }
 
+// functions that get triggered on app startup + TODO: Wrap on startup code in a service
 fetch(QUOTE_URL)
     .then(res => res.json())
     .then(json => {
@@ -121,7 +136,7 @@ fetch (JOKE_URL, {
     method: 'GET',
     headers: { 
         'Accept': 'application/json', 
-        'User-Agent': 'testApplication (https://github.com/Abhimint/employee-quotes)'
+        'User-Agent': `testApplication (${SELF_REPO})`
     },
     })
     .then(res => res.json())
@@ -129,6 +144,18 @@ fetch (JOKE_URL, {
         joke = json.joke
         console.log('Joke now', encodeURI(joke));
         return encodeURIComponent(joke.valueOf());
-    })
+    });
+
+const doesCEOExist = Employee.find({ role: /CEO/i }).exec((err, employee) => {
+    if (employee.length > 0) {
+        //ceoExists = true;
+        console.log('ceo exits ', employee, ceoExists);
+        return true;
+    } else {
+        //ceoExists = false;
+        console.log('ceo does not exits ', employee, ceoExists);
+        return false;
+    }
+});
 
 module.exports = employeeController;

@@ -12,7 +12,8 @@ app.locals.moment = require('moment');
 
 // TODO: Look into a way to add some lifecycle hooks/observables to give order to execution
 
-const connectionString = 'mongodb+srv://employeeAdmin:SCVK1fOuPrfDUyzf@cluster0.lvbvh.mongodb.net/employee-quotes?retryWrites=true&w=majority';
+const DB_PASS = 'SCVK1fOuPrfDUyzf';
+const connectionString = `mongodb+srv://employeeAdmin:${DB_PASS}@cluster0.lvbvh.mongodb.net/employee-quotes?retryWrites=true&w=majority`;
 
 mongoose.connect(connectionString, { useUnifiedTopology: true, useNewUrlParser: true })
   .then(() =>  {
